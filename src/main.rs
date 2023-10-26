@@ -1,5 +1,14 @@
-const CHARS: &str = r#"qwertyuiop[]\asdfghjkl;'zxcvbnm,./1234567890-=QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>?!@#$%^&*()_+`~"#;
+use std::io;
+use std::io::Write;
+use std::ops::RangeInclusive;
+
+use rand::seq::IteratorRandom;
+
+const CHARS: RangeInclusive<char> = ' '..='~';
+const LENGTH: usize = 50;
 
 fn main() {
-    println!("Hello, world!");
+    let chars = CHARS.choose_multiple(&mut rand::thread_rng(), LENGTH);
+    println!("{}", chars.into_iter().collect::<String>());
+    io::stdout().flush().unwrap();
 }
